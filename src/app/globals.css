@@ -1,0 +1,841 @@
+/* Tailwind CSS directives */
+/* stylelint-disable-next-line */
+@tailwind base;
+/* stylelint-disable-next-line */
+@tailwind components;
+/* stylelint-disable-next-line */
+@tailwind utilities;
+
+/* === ベースカラーパレット === */
+:root {
+  /* メインカラー */
+  --main-bg: #fafafa;
+  --main-text: #2d3748;
+  --main-border: #e2e8f0;
+  
+  /* アクセントカラー - 3色 */
+  --accent-primary: #9333ea;    /* 紫 - ハイネのテーマカラー */
+  --accent-secondary: #f97316;  /* オレンジ - 開発中 */
+  --accent-action: #2563eb;     /* ブルー - エンジニア */
+  
+  /* ニュートラル */
+  --neutral-lighter: #f8fafc;
+  --neutral-light: #f1f5f9;
+  --neutral-medium: #64748b;
+  --neutral-dark: #475569;
+  
+  /* ステータスカラー */
+  --status-recruiting: #dc2626;  /* 友達募集 */
+  --status-development: #059669; /* 開発中 */
+  --status-beta: #7c3aed;       /* β版 */
+}
+
+/* === 基本スタイル === */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
+  background-color: var(--main-bg);
+  color: var(--main-text);
+  line-height: 1.6;
+}
+
+/* === カードスタイル === */
+.main-card {
+  @apply bg-white rounded-2xl shadow-soft border border-main-border;
+  transition: all 0.3s ease;
+}
+
+.main-card:hover {
+  @apply shadow-medium;
+  transform: translateY(-2px);
+}
+
+.dev-card {
+  @apply bg-gradient-to-br from-white to-neutral-lighter rounded-2xl shadow-soft border border-main-border;
+  position: relative;
+  overflow: hidden;
+}
+
+.dev-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-secondary), var(--status-development));
+}
+
+/* === ヒーローセクション専用スタイル === */
+.hero-info-card {
+  @apply p-6 text-center rounded-2xl transition-all duration-300 backdrop-blur-md;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.hero-info-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* === メインレイアウト用スタイル === */
+.info-card {
+  @apply p-6 text-center rounded-2xl transition-all duration-300 backdrop-blur-sm;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(147, 51, 234, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.info-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 24px rgba(147, 51, 234, 0.15);
+  border-color: rgba(147, 51, 234, 0.2);
+}
+
+.main-btn-primary {
+  @apply px-8 py-4 text-lg font-bold rounded-2xl transition-all duration-300;
+  background: linear-gradient(135deg, var(--accent-primary), #a855f7);
+  color: white;
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.main-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(147, 51, 234, 0.4);
+}
+
+.main-btn-secondary {
+  @apply px-8 py-4 text-lg font-bold rounded-2xl transition-all duration-300;
+  background: linear-gradient(135deg, var(--accent-secondary), #fb923c);
+  color: white;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.main-btn-secondary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
+}
+
+/* === ヒーロー専用パーティクル === */
+.particle-hero {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: hero-particle-float 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-particle-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(90deg) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px) rotate(180deg) scale(0.8);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translateY(-20px) translateX(15px) rotate(270deg) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* === ボタンスタイル === */
+.btn-primary {
+  @apply text-white px-6 py-3 rounded-xl font-bold hover:shadow-strong transition-all duration-300;
+  background: linear-gradient(135deg, #f9a8d4, #a5b4fc);
+  box-shadow: 0 10px 15px -3px rgba(249, 168, 212, 0.2), 0 4px 6px -2px rgba(165, 180, 252, 0.1);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(249, 168, 212, 0.3), 0 10px 10px -5px rgba(165, 180, 252, 0.2);
+}
+
+.btn-secondary {
+  @apply bg-accent-secondary text-white px-6 py-3 rounded-xl font-bold shadow-accent hover:shadow-strong transition-all duration-300;
+  background: linear-gradient(135deg, var(--accent-secondary), #fb923c);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(249, 115, 22, 0.3), 0 10px 10px -5px rgba(249, 115, 22, 0.1);
+}
+
+.btn-outline {
+  @apply border-2 border-accent-primary text-accent-primary bg-white px-6 py-3 rounded-xl font-bold hover:bg-accent-primary hover:text-white transition-all duration-300;
+}
+
+/* === アイコンスタイル === */
+.icon-primary {
+  @apply w-16 h-16 bg-gradient-to-br from-accent-primary to-purple-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-accent;
+}
+
+.icon-secondary {
+  @apply w-16 h-16 bg-gradient-to-br from-accent-secondary to-orange-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-accent;
+}
+
+.icon-action {
+  @apply w-16 h-16 bg-gradient-to-br from-accent-action to-blue-600 rounded-2xl flex items-center justify-center text-2xl text-white shadow-accent;
+}
+
+/* === ステータスバー === */
+.status-bar {
+  @apply w-full bg-neutral-light rounded-full h-2 overflow-hidden;
+}
+
+.status-fill {
+  @apply h-full rounded-full transition-all duration-500 ease-out;
+}
+
+.status-fill.status-recruiting {
+  background: linear-gradient(90deg, var(--status-recruiting), #ef4444);
+}
+
+.status-fill.status-development {
+  background: linear-gradient(90deg, var(--status-development), #10b981);
+}
+
+.status-fill.status-beta {
+  background: linear-gradient(90deg, var(--status-beta), #8b5cf6);
+}
+
+/* === キャラクターエリア === */
+.character-area {
+  @apply relative;
+}
+
+.character-area::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-action), var(--accent-secondary));
+  border-radius: 24px;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+/* === パーティクルアニメーション === */
+.particle-modern {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-action));
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float-particle 8s ease-in-out infinite;
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.3;
+  }
+}
+
+/* === アニメーション === */
+.float-gentle {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* === エンジニア風要素 === */
+.engineer-card {
+  @apply bg-gray-900 text-green-400 rounded-lg font-mono text-xs p-4;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.prompt {
+  color: #38bdf8;
+}
+
+.command {
+  color: #fbbf24;
+}
+
+.output {
+  color: #10b981;
+}
+
+/* === ハイライト・ホバー効果 === */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* === 開発日記スタイル === */
+.dev-diary {
+  position: relative;
+}
+
+.dev-diary::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--status-development), var(--accent-action));
+  border-radius: 2px;
+}
+
+/* === グラデーション === */
+.bg-accent-gradient {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-action));
+}
+
+.bg-engineer-gradient {
+  background: linear-gradient(135deg, var(--accent-action), var(--accent-secondary));
+}
+
+.bg-dev-gradient {
+  background: linear-gradient(135deg, var(--status-development), var(--accent-action));
+}
+
+.text-engineer-gradient {
+  background: linear-gradient(135deg, var(--accent-action), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === 影 === */
+.shadow-soft {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.shadow-medium {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-strong {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-accent {
+  box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.2), 0 4px 6px -2px rgba(147, 51, 234, 0.1);
+}
+
+/* === RPG風スタイル === */
+.rpg-status {
+  @apply bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-lg p-4 font-mono relative overflow-hidden;
+}
+
+.rpg-status::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-action), var(--accent-secondary));
+}
+
+.level-badge {
+  @apply inline-flex items-center px-2 py-1 rounded text-xs font-bold;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-action));
+  color: white;
+}
+
+/* === ゲーム風UI要素 === */
+.game-ui {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(248,250,252,0.9));
+  border: 2px solid rgba(147, 51, 234, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.game-ui::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-action), var(--accent-secondary));
+  border-radius: 16px;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* === レスポンシブ調整 === */
+@media (max-width: 768px) {
+  .character-area {
+    padding: 1rem;
+  }
+  
+  .main-card {
+    margin: 0 0.5rem;
+  }
+  
+  .btn-primary, .btn-secondary, .btn-outline {
+    @apply w-full;
+  }
+
+  .hero-btn-primary, .hero-btn-secondary {
+    @apply w-full;
+  }
+
+  .main-btn-primary, .main-btn-secondary {
+    @apply w-full;
+  }
+
+  .hero-info-card, .info-card {
+    margin: 0 1rem;
+  }
+
+  .character-showcase {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* モバイルでは吹き出しを調整 */
+  .character-showcase .absolute.-left-8 {
+    left: 1rem;
+    right: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+}
+
+/* === アクセシビリティ === */
+@media (prefers-reduced-motion: reduce) {
+  .float-gentle,
+  .particle-modern,
+  .particle-hero,
+  .hover-lift:hover {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* === スクロールスナップ（オプション） === */
+@media (min-width: 1024px) {
+  .scroll-snap {
+    scroll-snap-type: y mandatory;
+  }
+  
+  .scroll-snap section {
+    scroll-snap-align: start;
+  }
+}
+
+/* === キャラクターショーケース === */
+.character-showcase {
+  position: relative;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+}
+
+.character-showcase::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: linear-gradient(135deg, 
+    rgba(147, 51, 234, 0.1) 0%, 
+    rgba(249, 115, 22, 0.1) 50%, 
+    rgba(37, 99, 235, 0.1) 100%);
+  border-radius: 2rem;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.character-showcase:hover::before {
+  opacity: 1;
+}
+
+.character-showcase:hover {
+  transform: translateY(-5px);
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
+}
+
+.hero-btn-primary {
+  @apply px-8 py-4 text-lg font-bold rounded-2xl transition-all duration-300 backdrop-blur-md;
+  background: linear-gradient(135deg, rgba(249, 168, 212, 0.9), rgba(165, 180, 252, 0.9));
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(249, 168, 212, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 16px 40px rgba(249, 168, 212, 0.4);
+}
+
+.hero-btn-primary:hover::before {
+  opacity: 1;
+}
+
+.hero-btn-secondary {
+  @apply px-8 py-4 text-lg font-bold rounded-2xl transition-all duration-300 backdrop-blur-md;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.9), rgba(251, 146, 60, 0.9));
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-btn-secondary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-btn-secondary:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 16px 40px rgba(249, 115, 22, 0.4);
+}
+
+.hero-btn-secondary:hover::before {
+  opacity: 1;
+}
+
+/* === グリッチ・ホログラム・モニター効果 === */
+
+/* グリッチテキスト */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.glitch-text::before {
+  animation: glitch-1 0.3s infinite;
+  color: #ff0040;
+  z-index: -1;
+}
+
+.glitch-text::after {
+  animation: glitch-2 0.3s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0%, 14%, 15%, 49%, 50%, 99%, 100% {
+    transform: translateX(0);
+  }
+  15%, 49% {
+    transform: translateX(-2px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 20%, 21%, 62%, 63%, 99%, 100% {
+    transform: translateX(0);
+  }
+  21%, 62% {
+    transform: translateX(2px);
+  }
+}
+
+/* 小さなグリッチ効果 */
+.glitch-small {
+  position: relative;
+}
+
+.glitch-small::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: glitch-small 2s infinite;
+  color: #ff0040;
+  opacity: 0.3;
+}
+
+@keyframes glitch-small {
+  0%, 90%, 100% {
+    transform: translateX(0);
+  }
+  91%, 95% {
+    transform: translateX(-1px);
+  }
+}
+
+/* ホログラムカード */
+.hologram-card {
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.1) 0%, 
+    rgba(255,255,255,0.05) 50%, 
+    rgba(255,255,255,0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.hologram-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255,255,255,0.2), 
+    transparent);
+  animation: hologram-scan 3s infinite;
+}
+
+.hologram-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,255,255,0.3);
+  border-color: rgba(0,255,255,0.5);
+}
+
+@keyframes hologram-scan {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* モニターフレーム */
+.monitor-frame {
+  background: linear-gradient(145deg, #2a2a3a, #1a1a2a);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.1),
+    inset 0 -2px 4px rgba(0,0,0,0.3),
+    0 0 20px rgba(0,255,255,0.2);
+}
+
+.monitor-screen {
+  background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.monitor-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,255,255,0.03) 2px,
+    rgba(0,255,255,0.03) 4px
+  );
+  pointer-events: none;
+}
+
+/* ホログラム背景 */
+.hologram-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, 
+    rgba(0,255,255,0.1) 0%, 
+    transparent 50%),
+  radial-gradient(circle at 80% 20%, 
+    rgba(255,0,255,0.1) 0%, 
+    transparent 50%),
+  radial-gradient(circle at 40% 80%, 
+    rgba(255,255,0,0.1) 0%, 
+    transparent 50%);
+  animation: hologram-bg 8s ease-in-out infinite;
+}
+
+@keyframes hologram-bg {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* スキャンライン */
+.scan-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,255,255,0.05) 3px,
+    rgba(0,255,255,0.05) 6px
+  );
+  animation: scan-lines 2s linear infinite;
+}
+
+@keyframes scan-lines {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* グリッチオーバーレイ */
+.glitch-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    transparent 98%, 
+    rgba(255,0,255,0.1) 100%);
+  animation: glitch-overlay 0.5s infinite;
+}
+
+@keyframes glitch-overlay {
+  0%, 90%, 100% { transform: translateX(0); }
+  92%, 96% { transform: translateX(-2px); }
+}
+
+/* ホログラムボタン */
+.hologram-button {
+  background: linear-gradient(135deg, 
+    rgba(0,255,255,0.2) 0%, 
+    rgba(255,0,255,0.2) 100%);
+  border: 2px solid rgba(0,255,255,0.5);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hologram-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255,255,255,0.3), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.hologram-button:hover {
+  box-shadow: 0 0 30px rgba(0,255,255,0.6);
+  border-color: rgba(255,0,255,0.8);
+  transform: translateY(-2px);
+}
+
+.hologram-button:hover::before {
+  left: 100%;
+}
+
+/* グロー効果 */
+.glow-line {
+  box-shadow: 0 0 10px rgba(0,255,255,0.8);
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+.glow-element {
+  box-shadow: 0 0 15px rgba(147, 51, 234, 0.6);
+  animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+.glow-border {
+  border-left-color: rgba(147, 51, 234, 0.8) !important;
+  box-shadow: -2px 0 10px rgba(147, 51, 234, 0.3);
+}
+
+@keyframes glow-pulse {
+  from { 
+    box-shadow: 0 0 5px currentColor; 
+  }
+  to { 
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; 
+  }
+}
+
+/* データストリーム効果 */
+.data-stream {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent, 
+    #00ffff, 
+    transparent);
+  animation: data-stream 3s linear infinite;
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* ネオンエフェクト */
+.neon-text {
+  color: #00ffff;
+  text-shadow: 
+    0 0 5px #00ffff,
+    0 0 10px #00ffff,
+    0 0 20px #00ffff,
+    0 0 40px #00ffff;
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+} 
